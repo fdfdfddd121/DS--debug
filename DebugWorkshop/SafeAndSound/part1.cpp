@@ -4,7 +4,7 @@
 char* string_copy(char* dest, unsigned int destsize, char* src)
 {
 	char* ret = dest;
-	while (*dest++ = *src++)
+	while (*ret++ = *src++)
 		;
 	return ret;
 }
@@ -12,10 +12,10 @@ char* string_copy(char* dest, unsigned int destsize, char* src)
 void part1()
 {
 	char password[] = "secret";
-	char dest[12];
 	char src[] = "hello world!";
+	char dest[sizeof(src)];
 
-	string_copy(dest, 12, src);
+	string_copy(dest,sizeof(dest), src);
 
 	std::cout << src << std::endl;
 	std::cout << dest << std::endl;
