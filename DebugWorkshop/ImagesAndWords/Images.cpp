@@ -50,9 +50,22 @@ Image *ReadImage(const char* filename)
 
 	// calculate image size
 	uint16_t imgsize = img->header.width * img->header.height;
+	if (imgsize != img->header.width * img->header.height) //make sure that there is no size overflow
+	{
+		std::cout << "int 16 bit overflow";
+		return nullptr;
+	}
 	img->data = new char[imgsize];
 
 	// read image content
+	is.seekg(0, std::ios::end);
+	int place = is.tellg();
+	if (place < imgsize + sizeof(ImageHeader)) //make sure the image is not smaller than it's given size
+	{
+		std::cout << "file size and given size are not the same" << std::endl;
+		return nullptr;
+	}
+	is.seekg(sizeof(ImageHeader), std::ios::beg);
 	char* tmpbuff = new char[img->header.width];
 	for (int i = 0; i < img->header.height; i++)
 	{
@@ -93,7 +106,7 @@ Image *GenerateDummyImage(uint16_t width, uint16_t height)
 
 int main()
 {
-	Image *im = ReadImage("img1.magi");
+	Image *im = ReadImage("img2.magi");
 	FreeImage(im);
 
 	return 0;
