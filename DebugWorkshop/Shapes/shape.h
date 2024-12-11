@@ -9,6 +9,7 @@ private:
 
 public:
 	Shape();
+	virtual ~Shape();
 	virtual float get_area() const;
 
 };
