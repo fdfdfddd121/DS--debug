@@ -9,7 +9,7 @@ int main()
 	std::cout << "what is the size of the series? ";
 	std::cin >> size;
 
-	while (size >= 0)
+	while (size > 0) //you can remove the equals or change zero to 1 doesn't really matter
 	{
 		std::cout << t1 << ", ";
 
